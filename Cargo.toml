@@ -1,0 +1,14 @@
+[package]
+name = "xxd"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+thiserror = "1.0"
+
+[profile.release]
+opt-level = "z"
+lto = true
+panic = "abort"
+debug = "none"
+codegen-units = 1
