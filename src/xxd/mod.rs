@@ -22,10 +22,10 @@ pub enum XXDError {
 fn get_full_output(arr: &[u8]) -> String {
     let mut output: String = String::new();
 
-    for (index, value) in arr.chunks(16).enumerate() {
-        let line_index = formattings::get_line_index(index);
-        let pairs = formattings::get_pairs_section(value);
-        let text = formattings::get_ascii_section(value);
+    for (index, chunk) in arr.chunks(16).enumerate() {
+        let line_index: String = formattings::get_line_index(index);
+        let pairs: String = formattings::get_pairs_section(chunk);
+        let text: String = formattings::get_ascii_section(chunk);
 
         output += &format!("{line_index}: {pairs:40} {text:}\n");
     }
@@ -35,13 +35,13 @@ fn get_full_output(arr: &[u8]) -> String {
 
 
 pub fn run_xxd() -> Result<String, XXDError> {
-    let operation = arguments::get_operation().map_err(
-        |error| match error {
+    let operation: Operation = arguments::get_operation().map_err(
+        |error: arguments::ArgumentError| match error {
             arguments::ArgumentError::InvalidNumberOfArguments(x) => XXDError::TooManyArguments(x)
         }
     )?;
 
-    let contents = match operation {
+    let contents: Vec<u8> = match operation {
         Operation::PrintHelp => return Ok(arguments::get_help_message()),
 
         Operation::ProcessingOperation(input_operation) => match input_operation {
