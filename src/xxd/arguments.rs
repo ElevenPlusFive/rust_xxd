@@ -38,8 +38,4 @@ pub fn get_help_message() -> String {
     \t\txxd [-h] [file]
     Options:
     \t\t-h\t\tprint this summary.".to_string()
-    // println!("Usage:");
-    // println!("\t\txxd [-h] [file]");
-    // println!("Options:");
-    // println!("\t\t-h\t\tprint this summary.");
 }
