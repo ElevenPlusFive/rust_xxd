@@ -50,7 +50,7 @@ pub fn run_xxd() -> Result<String, XXDError> {
             ),
 
             InputOperation::Stdin => input::get_stdin_contents().map_err(
-                |error| XXDError::GetStdinContentsFailed(error)
+                XXDError::GetStdinContentsFailed
             )
         }
     }?;
