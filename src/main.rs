@@ -1,16 +1,9 @@
-use std::convert::Infallible;
 mod xxd;
 
-fn main() -> Result<(), Infallible> {
-    let xxd_result: Result<String, xxd::XXDError> = xxd::run_xxd();
-    match xxd_result {
-        Ok(output) => {
-            print!("{output}");
-            Ok(())
-        },
-        Err(error) => {
-            eprintln!("xxd: {error}");
-            std::process::exit(1)
-        }
+fn main() {
+    let xxd_result = xxd::run_xxd();
+    if let Err(e) = xxd_result {
+        eprintln!("XXD Error: {}", e);
+        std::process::exit(1);
     }
 }
